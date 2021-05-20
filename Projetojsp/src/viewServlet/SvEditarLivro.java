@@ -26,8 +26,13 @@ public class SvEditarLivro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		String nome= request.getParameter("nome");
+		Livro l = new Livro();
+		LivroControl lc= new LivroControl();
+		 l=lc.localizar(nome);
+		 session.setAttribute("livro",l);
+		 request.getRequestDispatcher("editarLivro.jsp").forward(request, response);
 	}
 
 	/**
